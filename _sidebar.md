@@ -1,1 +1,1 @@
-[Test][baidu.com]
+[Test](Test)
