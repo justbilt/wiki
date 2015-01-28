@@ -1,1 +1,1 @@
-[Test][/Test.md]
+[Test][baidu.com]
