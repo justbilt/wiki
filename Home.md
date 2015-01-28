@@ -11,4 +11,4 @@ fl;ahjslkfhjawkls;jf;aklsjfklasjWelcome to justbilt's wiki !
   padding-top: 7em; }
 ```
 
-[hhh](image/lordSkillIcons_UserSkill_12.png)
+![hhh](image/lordSkillIcons_UserSkill_12.png)
