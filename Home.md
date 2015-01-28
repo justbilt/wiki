@@ -1,2 +1,2 @@
 fl;ahjslkfhjawkls;jf;aklsjfklasjWelcome to justbilt's wiki !
-[baidu](www.baidu.com)
+[baidu](http://www.baidu.com/)
