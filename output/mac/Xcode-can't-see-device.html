@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <title>Xcode无法识别设备 - Our team's wiki!</title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="container">
+            
+<div id="header">
+  <div id="post-nav"><a href="/">Home</a>&nbsp;»&nbsp;<a href="/#mac">mac</a>&nbsp;»&nbsp;Xcode无法识别设备</div>
+</div>
+<div class="clearfix"></div>
+<div id="title">Xcode无法识别设备</div>
+  <div id="content">
+  <p>Even though this one does not address the specific problem of the OP, it might be a solution for other people finding this question.</p>
+<p>In some circumstances, Xcode will not recognise (won't even see) a connected device that was previously recognised, even though there were no changes in Mac OS/iOS/Xcode versions. This seems to happen if you connect the device while the Mac and/or the device are locked when you connect them. The device will ask if you want to trust the computer even though you already did so, but the device will still not be visible in Xcode.</p>
+<p>Restarting Xcode or the device do not seem to have any effect. One solution is to reboot the Mac. Another much quicker solution is to restart usbmuxd:</p>
+<div class="hlcode"><pre><span class="mf">1.</span> <span class="n">Quit</span> <span class="n">Xcode</span>
+<span class="mf">2.</span> <span class="n">Disconnect</span> <span class="n">the</span> <span class="n">device</span>
+<span class="mf">3.</span> <span class="n">In</span> <span class="n">a</span> <span class="n">terminal</span> <span class="n">window</span><span class="p">,</span> <span class="n">type</span><span class="o">:</span> <span class="err">`</span><span class="n">sudo</span> <span class="n">pkill</span> <span class="n">usbmuxd</span><span class="err">`</span> <span class="p">(</span><span class="n">it</span> <span class="n">will</span> <span class="n">be</span> <span class="n">restarted</span> <span class="n">again</span> <span class="n">automatically</span><span class="p">)</span>
+<span class="mf">4.</span> <span class="n">Restart</span> <span class="n">Xcode</span>
+<span class="mf">5.</span> <span class="n">Connect</span> <span class="n">the</span> <span class="n">device</span>
+</pre></div>
+
+
+<p>Your device should now be visible again in Xcode!</p>
+<p>Hope that helps a few people.</p>
+</div>
+
+        </div>
+        <div id="footer">
+            <span>
+                Copyright © 2012-2014 .
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+            </span>
+        </div>
+        
+    </body>
+</html>
