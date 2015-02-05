@@ -3,7 +3,9 @@
 function commit()
 {
 	DATA=`date +%y-%m-%d-%H`
-	echo commit:$pwd:$DATA
+	PWD=`pwd`
+	echo commit:$PWD:$DATA
+	echo '--------------------------------------------------'
 	git add .
 	git rm $(git ls-files --deleted)
 	git commit -m "deploy$DATA"
