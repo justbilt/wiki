@@ -1,0 +1,4 @@
+[submodule "output"]
+	path = output
+	url = git@github.com:justbilt/wiki.git
+	branch = gh-pages
