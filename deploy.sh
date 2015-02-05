@@ -18,4 +18,4 @@ commit
 # commit output
 cd ./output
 git checkout gh-pages
-commit()
+commit
