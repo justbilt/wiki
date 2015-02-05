@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 
 import os
+import sys
 import os.path
 from sys import exit
 from fabric.api import env, local, run
@@ -57,6 +58,8 @@ def deploy():
 
 
 def g():
+    print "[INFO] copy image dir."
+    os.system("cp -r ./content/image ./output")
     local("simiki generate")
 
 
@@ -67,3 +70,10 @@ def p():
 def gp():
     g()
     p()
+
+
+def main():
+    gp()
+
+if __name__ == '__main__':
+    main()
