@@ -12,4 +12,10 @@ function commit()
 	git push origin
 }
 
+# commit source
 commit
+
+# commit output
+cd ./output
+git checkout gh-pages
+commit()
