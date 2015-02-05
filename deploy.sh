@@ -4,6 +4,7 @@ function commit()
 {
 	DATA=`date +%y-%m-%d-%H`
 	PWD=`pwd`
+	echo '--------------------------------------------------'
 	echo commit:$PWD:$DATA
 	echo '--------------------------------------------------'
 	git add .
