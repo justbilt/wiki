@@ -56,5 +56,43 @@ if __name__ == '__main__':
 ![][1]
 
 
+
+
+
+
+```
+Traceback (most recent call last):
+  File "/usr/local/bin/simiki", line 9, in <module>
+    load_entry_point('simiki==1.2.4', 'console_scripts', 'simiki')()
+  File "/Library/Python/2.7/site-packages/simiki/cli.py", line 245, in main
+    execute(args)
+  File "/Library/Python/2.7/site-packages/simiki/cli.py", line 236, in execute
+    preview(configs["destination"])
+  File "/Library/Python/2.7/site-packages/simiki/server.py", line 27, in preview
+    httpd = Reuse_TCPServer(("", port), Handler)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 419, in __init__
+    self.server_bind()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 430, in server_bind
+    self.socket.bind(self.server_address)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py", line 224, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 48] Address already in use
+```
+
+解决方案:
+
+```
+lsof -i:8000
+结果:
+COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  XXX zxsk    4u  IPv4 0x65c0c8e6c646d80d      0t0  TCP *:irdmi (LISTEN)
+```
+
+找到Python对应的PID,干掉:
+```
+kill XXX
+```
+
+
 [1]: /image/QQ20150129-1.jpg
 
