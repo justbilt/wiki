@@ -7,7 +7,9 @@ date: 2015-03-17 11:38:05
 
 在接入 sdk 的时候, 上层显示一个 sdk 的界面时, 整个屏幕就会快速闪烁, 十分影响体验.
 
-解决方案,打开`quick-cocos2d-x-2.2.5/lib/cocos2d-x/cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxActivity.java`:
+解决方案,打开
+
+`$QUICK-COCOS2D-X/lib/cocos2d-x/cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxActivity.java`:
 
 1.将 `onResume` 的`this.mGLSurfaceView.onResume();`实现改为:
 
