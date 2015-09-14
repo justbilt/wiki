@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mac 截图 | Our Team&#39;s Wiki</title>
+  <meta name="author" content="justbilt">
+  
+  <meta name="description" content="首先说一下两种截图121. ⌘＋shift＋3:全屏截图，保存截图到桌面2. ⌘＋shift＋4:鼠标选定区域截图，保存截图到桌面
+一如果你同时按住Ctrl，最后保存截图在剪切板里，你可以CMD+V来直接粘贴到编辑界面二使用Command＋shift＋4后，按下空格键，鼠标会变成一个小相机，这时">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Mac 截图"/>
+  <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Our Team&#39;s Wiki" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">Mac 截图</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-02-02</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>首先说一下两种截图<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> ⌘＋shift＋<span class="number">3</span>:全屏截图，保存截图到桌面</span><br><span class="line"><span class="number">2.</span> ⌘＋shift＋<span class="number">4</span>:鼠标选定区域截图，保存截图到桌面</span><br></pre></td></tr></table></figure></p>
+<p>一<br>如果你同时按住Ctrl，最后保存截图在剪切板里，你可以CMD+V来直接粘贴到编辑界面<br>二<br>使用Command＋shift＋4后，按下空格键，鼠标会变成一个小相机，这时候你使用鼠标对一个窗口点击一下鼠标左键，你已经对一个窗口进行了截图。<br>三<br>按Command＋shift＋4 后 ,画一个抓取的区域，不要松开鼠标，接着</p>
+<ol>
+<li>按住空格可以移动这个区域</li>
+<li>按住 Shift后，将锁定X 或者 Y轴进行拖动</li>
+<li>按住 Option后 将按照区域圆心进行放大.</li>
+</ol>
+<p>最后所有截图将直接显示在桌面上。</p>
+<p>设置截图格式:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">defaults write com<span class="class">.apple</span><span class="class">.screencapture</span> type jpg/png/gif</span><br><span class="line">killall SystemUIServer</span><br></pre></td></tr></table></figure></p>
+<p>设置截图保存路径:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">defaults write com<span class="class">.apple</span><span class="class">.screencapture</span> location /XXX/</span><br><span class="line">killall SystemUIServer</span><br></pre></td></tr></table></figure></p>
+<p>设置截图文件名称:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">defaults write com<span class="class">.apple</span><span class="class">.screencapture</span> name XXXXX</span><br><span class="line">killall SystemUIServer</span><br></pre></td></tr></table></figure></p>
+<p>截图是否含有阴影:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">defaults write com<span class="variable">.apple</span><span class="variable">.screencapture</span> disable-shadow -<span class="keyword">bool</span> <span class="literal">true</span></span><br><span class="line">killall System<span class="built_in">UIServer</span></span><br></pre></td></tr></table></figure></p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+	
+	
+		<li class="prev"><a href="/2015/02/02/Xcode-can't-see-device/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2015 justbilt
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

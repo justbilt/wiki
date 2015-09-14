@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS duplicate symbol静态库冲突 | Our Team&#39;s Wiki</title>
+  <meta name="author" content="justbilt">
+  
+  <meta name="description" content="今天队友在接入i4(爱思)的sdk时遇到了duplicate symbol错误,原因是i4的sdk中含有SBJSON的静态库,而quick也含有一份,最终导致错误:
+解决方案一:使用这篇文章内的解决方案搞一下, 核心内容摘录如下:
+本文的目标：合并libDomobOfferWallSDK.a、lib">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="iOS duplicate symbol静态库冲突"/>
+  <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Our Team&#39;s Wiki" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">iOS duplicate symbol静态库冲突</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-02-06</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>今天队友在接入i4(爱思)的sdk时遇到了duplicate symbol错误,原因是i4的sdk中含有SBJSON的静态库,而quick也含有一份,最终导致错误:</p>
+<h2 id="解决方案一:">解决方案一:</h2><p>使用<a href="http://www.cnblogs.com/wengzilin/p/3800856.html" target="_blank" rel="external">这篇</a>文章内的解决方案搞一下, 核心内容摘录如下:</p>
+<p>本文的目标：合并<code>libDomobOfferWallSDK.a</code>、<code>libDomobAdWallCoreSDK+UI.a</code>、<code>libDomobAdSDK.a</code></p>
+<p>1.依次查看所有需要合并的lib库所支持的框架类型。i386表示支持iphone模拟器，armv6应用在iphone 3gs上，armv7应用在iphone4，armv7s应用在iphone4s以及iphone5，arm64应用在最新的iphone5s上。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lipo -info libDomobOfferWallSDK.a</span><br><span class="line">输出是：Architectures <span class="keyword">in</span> **the fat file**: libDomobOfferWallSDK.a are: armv7 armv7s i386</span><br></pre></td></tr></table></figure>
+<p><code>fat file</code>表示这个库里面合并了多于1个框架。</p>
+<p>2.将lib库拆分出armv7、armv7s、i386类型的.a：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lipo -extract_family armv7 -output libDomobOfferWallSDK_arm.<span class="literal">a</span> libDomobOfferWallSDK.<span class="literal">a</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里要注意:libDomobOfferWallSDK_arm.a仍旧是fat的.</p>
+</blockquote>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lipo -info libDomobOfferWallSDK_arm.<span class="operator">a</span></span><br><span class="line">打印出：Architectures <span class="operator">in</span> <span class="operator">the</span> fat <span class="built_in">file</span>: libDomobOfferWallSDK_arm.<span class="operator">a</span> are: armv7 armv7s</span><br></pre></td></tr></table></figure>
+<p>接着用如下命令进一步分离出单独的armv7、armv7s版本：（非常重要的步骤）</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lipo libDomobOfferWallSDK_arm<span class="class">.a</span> -thin armv7 -output libDomobOfferWallSDK_armv7_final<span class="class">.a</span></span><br><span class="line">lipo libDomobOfferWallSDK_arm<span class="class">.a</span> -thin armv7s -output libDomobOfferWallSDK_armv7s_final.a</span><br></pre></td></tr></table></figure>
+<p>而对于i386则不用上述那么麻烦，直接用第一句-extract_family指令就能分离出只含i386版本的库：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lipo -extract_family i386 -output libDomobOfferWallSDK_i386.<span class="literal">a</span> libDomobOfferWallSDK.<span class="literal">a</span></span><br></pre></td></tr></table></figure>
+<p>经过上面操作后，我们得到了第一个待合并库libDomobOfferWallSDK.a 的armv7、armv7s、i386三个版本的库。剩下的两个待合并库同理。</p>
+<p>3.分离出目标文件(.o)</p>
+<p>进行实质上的合并。xcode里提示duplicate symbol都是说<strong><em>.o与</em></strong>.o冲突。注意，只有非fat file，也就是只含有单种版本的lib库才能分离出.o文件</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ar -x ../libDomobOfferWallSDK_armv7_final<span class="class">.a</span></span><br><span class="line">ar -x ../libDomobAdWallCoreSDK+UI_armv7_final<span class="class">.a</span></span><br><span class="line">ar -x ../libDomobAdSDK_armv7_final.a</span><br></pre></td></tr></table></figure>
+<p>这一步最好是在lib*_final.a的同级目录下新建一个文件夹，专门用来接收解压出来的.o文件。同种版本(如armv7)的都解压到这个文件夹中，相同的.o文件他会自己覆盖掉。</p>
+<p>4.从.o文件中合并成静态库：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">libtool -static -o ../libDomobUniversal-armv7<span class="class">.a</span> *<span class="class">.o</span></span><br><span class="line">armv7s、i386版本同理。</span><br></pre></td></tr></table></figure>
+<p>5.合并成最终的通用静态库：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lipo -create -output libDomobUniversal<span class="class">.a</span> libDomobUniversal-i386<span class="class">.a</span> libDomobUniversal-armv7<span class="class">.a</span> libDomobUniversal-armv7s.a</span><br></pre></td></tr></table></figure>
+<h2 id="解决方案二:">解决方案二:</h2><p>上边的方法略显繁琐, 我们可以考虑将quick-cocos2d-x的SBJSON给干掉,为了不影响其它平台的使用,我们可以新建一个target <code>quickcocos2dx_withoutSBJson</code>, </p>
+<p>在<code>Build Phases</code> -&gt; <code>Compile Sources</code>中删除所有sbjson相关的文件:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$QUICK_COCOS2DX_ROOT</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">cocos2d</span>-<span class="title">x</span>/<span class="title">external</span>/<span class="title">extra</span>/<span class="title">platform</span>/<span class="title">ios</span>/<span class="title">json</span>/<span class="title">SBJSON</span>.<span class="title">m</span></span></span><br><span class="line"><span class="variable">$QUICK_COCOS2DX_ROOT</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">cocos2d</span>-<span class="title">x</span>/<span class="title">external</span>/<span class="title">extra</span>/<span class="title">platform</span>/<span class="title">ios</span>/<span class="title">json</span>/<span class="title">SBJsonBase</span>.<span class="title">m</span></span></span><br><span class="line"><span class="variable">$QUICK_COCOS2DX_ROOT</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">cocos2d</span>-<span class="title">x</span>/<span class="title">external</span>/<span class="title">extra</span>/<span class="title">platform</span>/<span class="title">ios</span>/<span class="title">json</span>/<span class="title">SBJsonWriter</span>.<span class="title">m</span></span></span><br><span class="line"><span class="variable">$QUICK_COCOS2DX_ROOT</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">cocos2d</span>-<span class="title">x</span>/<span class="title">external</span>/<span class="title">extra</span>/<span class="title">platform</span>/<span class="title">ios</span>/<span class="title">json</span>/<span class="title">SBJsonParser</span>.<span class="title">m</span></span></span><br></pre></td></tr></table></figure>
+<p>然后让i4链接<code>quickcocos2dx_withoutSBJson.a</code>即可!</p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+		
+	
+	
+		<li class="prev"><a href="/2015/05/26/ipa-build-failed/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2015/02/02/ios-pre-rendered-gloss/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2015 justbilt
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

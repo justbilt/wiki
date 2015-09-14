@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ipa build 失败 | Our Team&#39;s Wiki</title>
+  <meta name="author" content="justbilt">
+  
+  <meta name="description" content="1. Check dependencies构建失败, 提示如下:123456** BUILD FAILED **The following build commands failed:	Check dependencies(1 failure)
+
+解决方案:
+
+查看 provisioning pre">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ipa build 失败"/>
+  <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Our Team&#39;s Wiki" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">ipa build 失败</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-05-26</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h1 id="1-_Check_dependencies">1. Check dependencies</h1><p>构建失败, 提示如下:<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span><span class="keyword">*</span> BUILD FAILED <span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The following build commands failed:</span><br><span class="line">	Check dependencies</span><br><span class="line">(1 failure)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>解决方案:</p>
+</blockquote>
+<p>查看 provisioning prefiles 是否正确, 存在问题则 点击 <code>Fix Issue</code>:<br><img src="/image/QQ20150526-1.jpg" alt=""></p>
+<h1 id="2-_Ld_/Users/xxx/XXX-app/xxx_normal_armv7">2. Ld /Users/xxx/XXX.app/xxx normal armv7</h1><p>构建失败, 提示如下:<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span><span class="keyword">*</span> BUILD FAILED <span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The following build commands failed:</span><br><span class="line">	Ld /Users/zxsk/Library/Developer/Xcode/DerivedData/dota-bvifnumrevheojggvqgtmxhudglx/Build/Products/Release-iphoneos/真三国OL.app/真三国OL normal armv7</span><br><span class="line">(1 failure)</span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span> ARCHIVE FAILED <span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>解决方案:</p>
+</blockquote>
+<p>编译失败, 在 XCode 中尝试下吧!</p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2015/02/06/static_lib_duplicate_symbol/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2015 justbilt
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

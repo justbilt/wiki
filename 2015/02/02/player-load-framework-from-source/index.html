@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Player从源码加载framework | Our Team&#39;s Wiki</title>
+  <meta name="author" content="justbilt">
+  
+  <meta name="description" content="默认player是从预编译framework_precompiled.zip包加载framework的, 这样做会提高运行效率,但是也会带来一些不便:
+1. framework的错误无法命中行号:123stack traceback:	[C]: in function &#39;addChild&#39;	[str">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Player从源码加载framework"/>
+  <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Our Team&#39;s Wiki" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">Player从源码加载framework</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-02-02</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>默认player是从预编译<code>framework_precompiled.zip</code>包加载framework的, 这样做会提高运行效率,但是也会带来一些不便:</p>
+<h4 id="1-_framework的错误无法命中行号:">1. framework的错误无法命中行号:</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stack traceback:</span><br><span class="line">	[C]: <span class="operator">in</span> <span class="function"><span class="keyword">function</span> <span class="string">'addChild'</span></span></span><br><span class="line">	[<span class="keyword">string</span> <span class="string">".../quick-cocos2d-x-2.2.5//framework/shortcodes.lua"</span>]:<span class="number">0</span>: <span class="operator">in</span> <span class="function"><span class="keyword">function</span> <span class="string">'add'</span></span></span><br></pre></td></tr></table></figure>
+<p>如上, 无论错误在哪里, 都会显示<code>0</code> 行.</p>
+<h4 id="2-_修改framework后得重新打预编译包,_无法做到实时,_出错后又无法准确定位-">2. 修改framework后得重新打预编译包, 无法做到实时, 出错后又无法准确定位.</h4><p>这就需要我们从源码加载framework.</p>
+<p>打开<code>$QUICK-COCOS2D-X/player/sources/AppDelegate.cpp</code>, 找到:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (projectConfig.isLoadPrecompiledFramework())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">string</span> precompiledFrameworkPath = SimulatorConfig::sharedDefaults()-&gt;getPrecompiledFrameworkPath();</span><br><span class="line">    pStack-&gt;loadChunksFromZIP(precompiledFrameworkPath.c_str());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改为:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (projectConfig.isLoadPrecompiledFramework())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">string</span> quickCocos2dxRootpath = SimulatorConfig::sharedDefaults()-&gt;getQuickCocos2dxRootPath();</span><br><span class="line">    pStack-&gt;addSearchPath(quickCocos2dxRootpath.c_str());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+		<li class="prev"><a href="/2015/02/02/quick-x-android-ClippingNode-bug/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2015 justbilt
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Fatal Error: Allowed Memory Size of 134217728 Bytes Exhausted | Our Team&#39;s Wiki</title>
+  <meta name="author" content="justbilt">
+  
+  <meta name="description" content="今天加密脚本的时候出现了这样的错误:
+1234567  &amp;gt; get bytes [  1 KB] move.ModelsBase  &amp;gt; get bytes [  1 KB] move.Move  &amp;gt; get bytes [  1 KB] move.OperationsBase  &amp;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Fatal Error: Allowed Memory Size of 134217728 Bytes Exhausted"/>
+  <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Our Team&#39;s Wiki" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">Fatal Error: Allowed Memory Size of 134217728 Bytes Exhausted</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-04-02</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>今天加密脚本的时候出现了这样的错误:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  &gt; <span class="built_in">get</span> <span class="keyword">bytes</span> [  <span class="number">1</span> KB] move.ModelsBase</span><br><span class="line">  &gt; <span class="built_in">get</span> <span class="keyword">bytes</span> [  <span class="number">1</span> KB] move.Move</span><br><span class="line">  &gt; <span class="built_in">get</span> <span class="keyword">bytes</span> [  <span class="number">1</span> KB] move.OperationsBase</span><br><span class="line">  &gt; <span class="built_in">get</span> <span class="keyword">bytes</span> [  <span class="number">1</span> KB] move.ViewsBase</span><br><span class="line"><span class="built_in">create</span> ZIP archive <span class="built_in">file</span>: ../res/game.zip</span><br><span class="line">PHP Fatal error:  Allowed memory size <span class="operator">of</span> <span class="number">134217728</span> <span class="keyword">bytes</span> exhausted (tried <span class="built_in">to</span> allocate <span class="number">32</span> <span class="keyword">bytes</span>) <span class="operator">in</span> /Users/zxsk/Documents/Project2/trunk/Developer/<span class="number">3</span>rdlib/quick-cocos2d-x-<span class="number">2.2</span><span class="number">.5</span>/bin/lib/quick/xxtea.php <span class="command"><span class="keyword">on</span> <span class="title">line</span> <span class="title">351</span></span></span><br><span class="line">bogon:proj.tools zxsk$ sh make_package.sh</span><br></pre></td></tr></table></figure>
+<p>在 <code>stackoverflow.com</code> 上发现<a href="http://stackoverflow.com/questions/561066/fatal-error-allowed-memory-size-of-134217728-bytes-exhausted-codeigniter-xml" target="_blank" rel="external">这个</a>答案:</p>
+<blockquote>
+<p>The correct way is to edit your php.ini file. Edit memory_limit to your desire value.</p>
+<p>As from your question, 128M (which is the default limit) has been exceeded, so there is something seriously wrong with your code as it should not take that much.</p>
+<p>If you know why it takes that much and you want to allow it set memory_limit = 512M or higher and you should be good.</p>
+</blockquote>
+<p>解决方案:</p>
+<p>在 <code>$QUICK-COCOS2D-X/bin/lib/quick/xxtea.php</code> 的文件起始位置<code>&lt;?php</code>上方加入:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span> ini_set(<span class="string">'memory_limit'</span>, <span class="string">'-1'</span>); <span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>解决!</p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2015/03/17/quick-x-android-blink-bug/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2015 justbilt
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
