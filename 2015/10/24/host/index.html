@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>quick-x android 开启深度缓冲 | Our Team&#39;s Wiki</title>
+  <title>Mac host 相关 | Our Team&#39;s Wiki</title>
   <meta name="author" content="justbilt">
   
-  <meta name="description" content="ClippingNode在一些Android平台上显示会出现显示不正确,该问题的解决方案如下：
-打开quick-cocos2d-x-2.2.5/lib/cocos2d-x/cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxGLSu">
+  <meta name="description" content="1. host 文件路径:1/private/etc/hosts">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="quick-x android 开启深度缓冲"/>
+  <meta property="og:title" content="Mac host 相关"/>
   <meta property="og:site_name" content="Our Team&#39;s Wiki"/>
 
   
@@ -46,7 +45,7 @@
   <div class="container" id="container">
 	<div class="content">
 	  <div class="page-header">		
-  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">quick-x android 开启深度缓冲</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-02-02</span></h1>
+  <h1><a class="brand" href="/">Our Team&#39;s Wiki</a><span class="split"></span><span class="title">Mac host 相关</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2015-10-24</span></h1>
 </div>		
 
 <div class="row page">
@@ -59,10 +58,7 @@
 	  
 
 	  <!-- content -->
-	  <p>ClippingNode在一些Android平台上显示会出现显示不正确,该问题的解决方案如下：</p>
-<p>打开<code>quick-cocos2d-x-2.2.5/lib/cocos2d-x/cocos2dx/platform/android/java/src/org/cocos2dx/lib/Cocos2dxGLSurfaceView.java</code>文件:</p>
-<p>修改<code>Cocos2dxGLSurfaceView</code>的构造函数为:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Cocos2dxGLSurfaceView</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>(context);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">this</span>.initView();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">this</span>.setEGLConfigChooser(<span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">16</span>, <span class="number">8</span>); <span class="comment">// add this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>	  
+	  <h1 id="1-_host_文件路径:">1. host 文件路径:</h1><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">private</span>/etc/hosts</span><br></pre></td></tr></table></figure>	  
 
 	  <div>
   		<center>
@@ -74,6 +70,29 @@
 	
 	
 		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -91,37 +110,12 @@
 	
 		
 	
-		
 	
-		
-			
-		
-	
-		
-			
-			
-		
-	
-		
-			
-			
-			
-		
-	
-		
-	
-		
-	
-		
-			
-		
-	
-	
-		<li class="prev"><a href="/2015/02/02/quick-x-windows-ttf-anti-aliasing/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next"><a href="/2015/02/02/player-load-framework-from-source/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/2015/09/06/reinstall-mac/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
